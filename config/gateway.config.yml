@@ -44,6 +44,7 @@ policies:
   - proxy
   - rate-limit
   - request-transformer
+  - response-transformer
 pipelines:
   default:
     apiEndpoints:
@@ -69,7 +70,15 @@ pipelines:
                   hello: req.query.id
               headers:
                 add:
-                  r-test: req.query.id
+                  r-test: req.query.id || '32'
+      - response-transformer:
+          - action:
+              body:
+                add:
+                  hello: "'world'"
+              headers:
+                add:
+                  r-test: "'header value'"
       - rate-limit: # 限制频次
           - action:
               max: 3 # 最大请求多少次
