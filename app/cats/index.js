@@ -14,6 +14,20 @@ app.get('/cats', (req, res) => {
     })
 })
 
+app.get('/cats/name', (req, res) => {
+    res.send({
+        text: 'hello cats',
+        path: '/cats/name'
+    })
+})
+
+app.get('/cats/v1/name', (req, res) => {
+    res.send({
+        text: 'hello cats',
+        path: '/cats/v1/name'
+    })
+})
+
 app.post('/cats', (req, res) => {
     res.send({
         text: 'hello cats'

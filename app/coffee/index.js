@@ -7,7 +7,21 @@ app.get('/', (req, res) => {
 })
 
 app.get('/coffee', (req, res) => {
-    res.send('hello coffee')
+    res.send({
+        text: 'hello coffee'
+    })
+})
+
+app.get('/coffee', (req, res) => {
+    res.send({
+        text: 'hello coffee'
+    })
+})
+app.get('/coffee/name', (req, res) => {
+    res.send({
+        text: 'hello coffee',
+        path: '/coffee/name'
+    })
 })
 
 app.get('/healthz', (req, res) => {
