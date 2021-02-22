@@ -114,6 +114,10 @@ pipelines:
     apiEndpoints:
       - coffee
     policies:
+      - cors: # 其实配置的是：Access-Control-Allow-Origin 属性
+          - action:
+              origin: 'localhost'
+              methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
       - rewrite: # 添加重定向
           - condition:
               name: pathmatch
