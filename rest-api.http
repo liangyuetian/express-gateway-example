@@ -3,7 +3,7 @@ GET {{HOST}}/ip
 Accept: application/json
 
 ###
-GET {{HOST}}/cats/
+GET {{HOST}}/cats
 Accept: application/json
 
 ###
@@ -13,6 +13,10 @@ Accept: application/json
 {
     "name": 1
 }
+
+###
+GET {{HOST}}/cats/name
+Accept: application/json
 
 ###
 GET {{HOST}}/coffee
