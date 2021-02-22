@@ -1,0 +1,37 @@
+###
+GET {{HOST}}/ip
+Accept: application/json
+
+###
+GET {{HOST}}/cats/
+Accept: application/json
+
+###
+POST http://localhost:4001/cats?id=2
+Accept: application/json
+
+{
+    "name": 1
+}
+
+###
+GET {{HOST}}/coffee
+Accept: application/json
+
+###
+GET {{HOST}}/healthz
+Accept: application/json
+
+
+
+
+
+
+GET http://localhost:4001
+Accept: application/json
+
+###
+GET http://localhost:4002
+Accept: application/json
+
+###
