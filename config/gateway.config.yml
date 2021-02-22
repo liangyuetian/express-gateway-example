@@ -46,6 +46,7 @@ policies:
   - request-transformer
   - response-transformer
   - rewrite
+  - terminate # 终止api
 pipelines:
   default:
     apiEndpoints:
@@ -64,6 +65,7 @@ pipelines:
     apiEndpoints:
       - cats
     policies:
+
       - rewrite: # 添加重定向
           - condition:
               name: pathmatch
@@ -102,6 +104,9 @@ pipelines:
       - log: # policy name
           - action: # array of condition/actions objects
               message: '${req.method} ${req.originalUrl}' # parameter for log action
+      - terminate:
+          statusCode: 401
+          message: '已下线'
       - proxy:
           - action:
               serviceEndpoint: cats
