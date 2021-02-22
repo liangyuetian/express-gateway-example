@@ -121,7 +121,7 @@ pipelines:
       - rewrite: # 添加重定向
           - condition:
               name: pathmatch
-              match: /coffee/:route # 多端匹配
+              match: /coffee/:route # 多段匹配?
             action:
               rewrite: /coffee/v1/:route
               redirect: 302

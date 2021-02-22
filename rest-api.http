@@ -22,6 +22,10 @@ Accept: application/json
 GET {{HOST}}/coffee
 Accept: application/json
 X-TEST: 123
+###
+GET {{HOST}}/coffee/name
+Accept: application/json
+X-TEST: 123
 
 ###
 GET {{HOST}}/coffee/v1/name
