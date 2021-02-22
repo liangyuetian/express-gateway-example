@@ -1,5 +1,5 @@
 http:
-  port: 8080
+  port: 9513
 admin:
   port: 9876
   host: localhost
@@ -9,10 +9,18 @@ apiEndpoints:
     paths: '/ip'
     proxyOptions: # https://github.com/http-party/node-http-proxy
       changeOrigin: true
-  local:
+  cats:
     host: localhost
     methods: 'GET,OPTIONS,HEAD,PUT,PATCH,POST,DELETE' # [ "GET", "OPTIONS", "PUT", "POST", "PATCH", "DELETE" ]
-    paths: '/healthz'
+    paths: '/*'
+    scopes:
+      - read
+      - write
+      - delete
+  coffee:
+    host: localhost
+    methods: 'GET,OPTIONS,HEAD,PUT,PATCH,POST,DELETE' # [ "GET", "OPTIONS", "PUT", "POST", "PATCH", "DELETE" ]
+    paths: '/coffee'
     scopes:
       - read
       - write
@@ -20,9 +28,12 @@ apiEndpoints:
 serviceEndpoints:
   httpbin:
     url: https://httpbin.org
-  local:
+  cats:
+    urls: # 负载平衡策略，循环请求
+      - http://localhost:4001
+  coffee:
     urls:
-      - http://localhost:3002
+      - http://localhost:4002
 policies:
   - basic-auth
   - cors
@@ -32,6 +43,7 @@ policies:
   - oauth2
   - proxy
   - rate-limit
+  - request-transformer
 pipelines:
   default:
     apiEndpoints:
@@ -46,14 +58,32 @@ pipelines:
           - action:
               serviceEndpoint: httpbin
               changeOrigin: true
-  local:
+  cats:
     apiEndpoints:
-      - local
+      - cats
+    policies:
+      - rate-limit: # 限制频次
+          - action:
+              max: 3 # 最大请求多少次
+              windowMs: 1000 # 每隔多少毫秒
+              rateLimitBy: "${req.hostname}" # 筛选
+              message: "请求太频繁，请稍后重试"
+              statusCode: 429 # 超出最大值时返回状态码
+      - log: # policy name
+          - action: # array of condition/actions objects
+              message: '${req.method} ${req.originalUrl}' # parameter for log action
+      - proxy:
+          - action:
+              serviceEndpoint: cats
+              changeOrigin: true
+  coffee:
+    apiEndpoints:
+      - coffee
     policies:
       - log: # policy name
           - action: # array of condition/actions objects
-              message: ${req.method} ${req.originalUrl} # parameter for log action
+              message: '${req.method} ${req.originalUrl}' # parameter for log action
       - proxy:
           - action:
-              serviceEndpoint: local
+              serviceEndpoint: coffee
               changeOrigin: true
