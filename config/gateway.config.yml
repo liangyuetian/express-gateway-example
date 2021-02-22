@@ -11,7 +11,7 @@ apiEndpoints:
       changeOrigin: true
   local:
     host: localhost
-    methods: [ "GET", "OPTIONS", "PUT", "POST", "PATCH", "DELETE" ]
+    methods: 'GET,OPTIONS,HEAD,PUT,PATCH,POST,DELETE' # [ "GET", "OPTIONS", "PUT", "POST", "PATCH", "DELETE" ]
     paths: '/healthz'
     scopes:
       - read
@@ -46,7 +46,6 @@ pipelines:
           - action:
               serviceEndpoint: httpbin
               changeOrigin: true
-
   local:
     apiEndpoints:
       - local
