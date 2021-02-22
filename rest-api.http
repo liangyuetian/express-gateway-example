@@ -11,7 +11,7 @@ POST http://localhost:4001/cats?id=2
 Accept: application/json
 
 {
-    "name": 1
+    "name": "a76a8863-f95d-48a5-a1f5-040a1afd3fb5"
 }
 
 ###
