@@ -1,0 +1,15 @@
+{
+  "name": "node-gateway-started",
+  "description": "Express Gateway Instance Bootstraped from Command Line",
+  "repository": {},
+  "license": "UNLICENSED",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start:started": "node server.js"
+  },
+  "dependencies": {
+    "express-gateway": "^1.16.10",
+    "express-gateway-plugin-lambda": "^1.2.0"
+  }
+}
