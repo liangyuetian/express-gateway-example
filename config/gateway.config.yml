@@ -64,7 +64,7 @@ pipelines:
     apiEndpoints:
       - cats
     policies:
-      - rewrite:
+      - rewrite: # 添加重定向
           - condition:
               name: pathmatch
               match: /cats/:code
@@ -110,6 +110,18 @@ pipelines:
     apiEndpoints:
       - coffee
     policies:
+      - rewrite: # 添加重定向
+          - condition:
+              name: pathmatch
+              match: /coffee/:code* # 多端匹配
+            action:
+              rewrite: /coffee/:code
+              redirect: 302
+          - condition:
+              name: regexpmatch
+              match: ^/js/(.*)$
+            action:
+              rewrite: /src/js/$1
       - log: # policy name
           - action: # array of condition/actions objects
               message: '${req.method} ${req.originalUrl}' # parameter for log action
