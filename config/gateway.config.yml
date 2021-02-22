@@ -12,7 +12,7 @@ apiEndpoints:
   cats:
     host: localhost
     methods: 'GET,OPTIONS,HEAD,PUT,PATCH,POST,DELETE' # [ "GET", "OPTIONS", "PUT", "POST", "PATCH", "DELETE" ]
-    paths: '/*'
+    paths: '/cats*'
     scopes:
       - read
       - write
@@ -20,7 +20,7 @@ apiEndpoints:
   coffee:
     host: localhost
     methods: 'GET,OPTIONS,HEAD,PUT,PATCH,POST,DELETE' # [ "GET", "OPTIONS", "PUT", "POST", "PATCH", "DELETE" ]
-    paths: '/coffee'
+    paths: '/coffee*'
     scopes:
       - read
       - write
@@ -117,9 +117,9 @@ pipelines:
       - rewrite: # 添加重定向
           - condition:
               name: pathmatch
-              match: /coffee/:code* # 多端匹配
+              match: /coffee/:route # 多端匹配
             action:
-              rewrite: /coffee/:code
+              rewrite: /coffee/v1/:route
               redirect: 302
           - condition:
               name: regexpmatch

@@ -23,6 +23,12 @@ app.get('/coffee/name', (req, res) => {
         path: '/coffee/name'
     })
 })
+app.get('/coffee/v1/name', (req, res) => {
+    res.send({
+        text: 'hello coffee',
+        path: '/coffee/v1/name'
+    })
+})
 
 app.get('/healthz', (req, res) => {
     res.send('coffee ok')
