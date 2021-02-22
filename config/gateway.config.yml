@@ -45,6 +45,7 @@ policies:
   - rate-limit
   - request-transformer
   - response-transformer
+  - rewrite
 pipelines:
   default:
     apiEndpoints:
@@ -63,6 +64,18 @@ pipelines:
     apiEndpoints:
       - cats
     policies:
+      - rewrite:
+          - condition:
+              name: pathmatch
+              match: /cats/:code
+            action:
+              rewrite: /cats/v1/:code
+              redirect: 302
+          - condition:
+              name: regexpmatch
+              match: ^/js/(.*)$
+            action:
+              rewrite: /src/js/$1
       - request-transformer:
           - action:
               body:
