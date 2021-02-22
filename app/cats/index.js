@@ -10,6 +10,14 @@ app.get('/cats', (req, res) => {
     res.send('hello cats')
 })
 
+app.post('/cats', (req, res) => {
+    res.send('hello cats')
+})
+
+app.get('/healthz', (req, res) => {
+    res.send('cats ok')
+})
+
 module.exports = {
     run: () => {
         return new Promise(resolve => {

@@ -10,6 +10,10 @@ app.get('/coffee', (req, res) => {
     res.send('hello coffee')
 })
 
+app.get('/healthz', (req, res) => {
+    res.send('coffee ok')
+})
+
 module.exports = {
     run: () => {
         return new Promise(resolve => {
