@@ -62,6 +62,14 @@ pipelines:
     apiEndpoints:
       - cats
     policies:
+      - request-transformer:
+          - action:
+              body:
+                add:
+                  hello: req.query.id
+              headers:
+                add:
+                  r-test: req.query.id
       - rate-limit: # 限制频次
           - action:
               max: 3 # 最大请求多少次
