@@ -7,6 +7,9 @@ db:
 plugins:
   express-gateway-plugin-rewrite:
     param1: 'param from system.config'
+  url-random:
+    param1: 'param from system.config'
+    package: '../../../plugins/policies/express-gateway-plugin-url-random/manifest'
 
 crypto:
   cipherKey: sensitiveKey
