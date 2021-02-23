@@ -1,6 +1,9 @@
 const express = require('express')
+const morgan = require('morgan');
 
 const app = express()
+
+app.use(morgan('short'));
 
 app.get('/', (req, res) => {
     res.send({
@@ -41,7 +44,7 @@ app.get('/healthz', (req, res) => {
 module.exports = {
     run: () => {
         return new Promise(resolve => {
-            app.listen(4001, () => {
+            app.listen(4001, '0.0.0.0', () => {
                 console.log('cats run port 4001')
                 resolve()
             })
