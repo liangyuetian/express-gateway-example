@@ -141,3 +141,8 @@ pipelines:
           - action:
               serviceEndpoint: coffee
               changeOrigin: true
+              secure: false # 验证ssl证书
+              timeout: 60000
+              headers:
+                X-Name: 'x1s'
+
