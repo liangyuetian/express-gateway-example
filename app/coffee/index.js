@@ -7,12 +7,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/coffee', (req, res) => {
-    res.send({
-        text: 'hello coffee'
-    })
-})
-
-app.get('/coffee', (req, res) => {
+    console.log(req.url)
     res.send({
         text: 'hello coffee'
     })
