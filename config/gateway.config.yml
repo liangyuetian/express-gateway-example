@@ -1,16 +1,17 @@
 http: # https://www.express-gateway.io/docs/configuration/gateway.config.yml/http/
   port: 9513
+  hostname: 0.0.0.0
 admin:
   port: 9876
   host: localhost
 apiEndpoints:
   api:
-    host: localhost
+    host: '*'
     paths: '/ip'
     proxyOptions: # https://github.com/http-party/node-http-proxy
       changeOrigin: true
   cats:
-    host: localhost
+    host: '*'
     methods: 'GET,OPTIONS,HEAD,PUT,PATCH,POST,DELETE' # [ "GET", "OPTIONS", "PUT", "POST", "PATCH", "DELETE" ]
     paths: '/cats*'
     scopes:
@@ -18,7 +19,7 @@ apiEndpoints:
       - write
       - delete
   coffee:
-    host: localhost
+    host: '*'
     methods: 'GET,OPTIONS,HEAD,PUT,PATCH,POST,DELETE' # [ "GET", "OPTIONS", "PUT", "POST", "PATCH", "DELETE" ]
     paths: '/coffee*'
     scopes:
@@ -30,10 +31,10 @@ serviceEndpoints:
     url: https://httpbin.org
   cats:
     urls: # 负载平衡策略，循环请求
-      - http://localhost:4001
+      - http://127.0.0.1:4001
   coffee:
     urls:
-      - http://localhost:4002
+      - http://127.0.0.1:4002
 policies:
   - basic-auth
   - cors
@@ -115,9 +116,9 @@ pipelines: # https://www.express-gateway.io/docs/policies/
       - coffee
     policies:
 #      - basic-auth:
-      - expression:
-          - action:
-              jscode: 'req.url = req.url + "&x=2"'
+#      - expression:
+#          - action:
+#              jscode: 'req.url = req.url + "&x=2"'
       - cors: # 其实配置的是：Access-Control-Allow-Origin 属性
           - action:
               origin: 'localhost'
