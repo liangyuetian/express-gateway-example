@@ -12,6 +12,7 @@
     "express": "^4.17.1",
     "express-gateway": "^1.16.10",
     "express-gateway-plugin-lambda": "^1.2.0",
-    "express-gateway-plugin-rewrite": "^1.3.0"
+    "express-gateway-plugin-rewrite": "^1.3.0",
+    "morgan": "^1.10.0"
   }
 }
