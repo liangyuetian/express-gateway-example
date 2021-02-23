@@ -137,12 +137,17 @@ pipelines:
       - log: # policy name
           - action: # array of condition/actions objects
               message: '${req.method} ${req.originalUrl}' # parameter for log action
+      - response-transformer:
+          - action:
+              headers:
+                add:
+                  r-test: "'header value'"
       - proxy:
           - action:
               serviceEndpoint: coffee
               changeOrigin: true
               secure: false # 验证ssl证书
               timeout: 60000
-              headers:
+              headers: # 放置在请求头中
                 X-Name: 'x1s'
 

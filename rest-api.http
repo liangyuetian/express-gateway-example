@@ -1,3 +1,4 @@
+
 ###
 GET {{HOST}}/ip
 Accept: application/json
@@ -19,9 +20,10 @@ GET {{HOST}}/cats/name
 Accept: application/json
 
 ###
-GET {{HOST}}/coffee
+GET {{HOST}}/coffee?id=1
 Accept: application/json
 X-TEST: 123
+
 ###
 GET {{HOST}}/coffee/name
 Accept: application/json
@@ -31,6 +33,17 @@ X-TEST: 123
 GET {{HOST}}/coffee/v1/name
 Accept: application/json
 
+###
+POST {{HOST}}/oauth2/authorize
+Content-Type: application/json
+
+{}
+
+###
+POST {{HOST}}/oauth2/token
+Content-Type: application/json
+
+{}
 
 
 
