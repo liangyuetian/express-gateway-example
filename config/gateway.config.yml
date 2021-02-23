@@ -94,13 +94,13 @@ pipelines: # https://www.express-gateway.io/docs/policies/
               headers:
                 add:
                   r-test: "'header value'"
-      - rate-limit: # 限制频次
-          - action:
-              max: 10000 # 最大请求多少次
-              windowMs: 10000 # 每隔多少毫秒
-              rateLimitBy: "${req.hostname}" # 筛选
-              message: "请求太频繁，请稍后重试"
-              statusCode: 429 # 超出最大值时返回状态码
+#      - rate-limit: # 限制频次
+#          - action:
+#            max: 10000 # 最大请求多少次
+#            windowMs: 10000 # 每隔多少毫秒
+#            rateLimitBy: "${req.hostname}" # 筛选
+#            message: "请求太频繁，请稍后重试"
+#            statusCode: 429 # 超出最大值时返回状态码
       - log: # policy name
           - action: # array of condition/actions objects
               message: '${req.method} ${req.originalUrl}'
