@@ -37,7 +37,7 @@ serviceEndpoints:
 policies:
   - basic-auth
   - cors
-  - expression
+  - expression # 启用表达式，执行任意JavaScript代码
   - key-auth
   - log
   - oauth2
@@ -114,6 +114,10 @@ pipelines:
     apiEndpoints:
       - coffee
     policies:
+#      - basic-auth:
+      - expression:
+          - action:
+              jscode: 'req.url = req.url + "&x=2"'
       - cors: # 其实配置的是：Access-Control-Allow-Origin 属性
           - action:
               origin: 'localhost'
