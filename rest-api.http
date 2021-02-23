@@ -20,7 +20,7 @@ GET {{HOST}}/cats/name
 Accept: application/json
 
 ###
-GET {{HOST}}/coffee?id=1
+GET {{HOST}}/coffee
 Accept: application/json
 X-TEST: 123
 
@@ -32,6 +32,11 @@ X-TEST: 123
 ###
 GET {{HOST}}/coffee/v1/name
 Accept: application/json
+
+###
+GET {{HOST}}/wanted/healthz
+Accept: application/json
+
 
 ###
 POST {{HOST}}/oauth2/authorize
@@ -49,11 +54,6 @@ Content-Type: application/json
 
 
 
-
-
-###
-GET {{HOST}}/healthz
-Accept: application/json
 
 
 

@@ -26,6 +26,15 @@ apiEndpoints:
       - read
       - write
       - delete
+  wanted:
+    host: '*'
+    methods: 'GET,OPTIONS,HEAD,PUT,PATCH,POST,DELETE' # [ "GET", "OPTIONS", "PUT", "POST", "PATCH", "DELETE" ]
+    paths: '/wanted*'
+    scopes:
+      - read
+      - write
+      - delete
+
 serviceEndpoints:
   httpbin:
     url: https://httpbin.org
@@ -35,6 +44,9 @@ serviceEndpoints:
   coffee:
     urls:
       - http://127.0.0.1:4002
+  wanted:
+    urls:
+      - http://liantiao-api.ymt.io
 policies:
   - basic-auth
   - cors
@@ -152,4 +164,27 @@ pipelines: # https://www.express-gateway.io/docs/policies/
               timeout: 60000
               headers: # 放置在请求头中
                 X-Name: 'x1s'
+  wanted:
+    apiEndpoints:
+      - wanted
+    policies:
+      - cors: # 其实配置的是：Access-Control-Allow-Origin 属性
+          - action:
+              origin: 'localhost'
+              methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
+      - log: # policy name
+          - action: # array of condition/actions objects
+              message: '${req.method} ${req.originalUrl}'
+      - response-transformer:
+          - action:
+              headers:
+                add:
+                  r-test: "'header value'"
+      - proxy:
+          - action:
+              serviceEndpoint: wanted
+              #              protocolRewrite: 'http' # 重写http协议
+              changeOrigin: true
+              secure: false # 验证ssl证书
+              timeout: 60000
 
