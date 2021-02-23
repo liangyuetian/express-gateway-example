@@ -1,4 +1,4 @@
-http:
+http: # https://www.express-gateway.io/docs/configuration/gateway.config.yml/http/
   port: 9513
 admin:
   port: 9876
@@ -47,7 +47,7 @@ policies:
   - response-transformer
   - rewrite
 #  - terminate # 终止api
-pipelines:
+pipelines: # https://www.express-gateway.io/docs/policies/
   default:
     apiEndpoints:
       - api
@@ -145,6 +145,7 @@ pipelines:
       - proxy:
           - action:
               serviceEndpoint: coffee
+#              protocolRewrite: 'http' # 重写http协议
               changeOrigin: true
               secure: false # 验证ssl证书
               timeout: 60000
