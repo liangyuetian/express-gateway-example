@@ -34,7 +34,7 @@ GET {{HOST}}/coffee/v1/name
 Accept: application/json
 
 ###
-GET {{HOST}}/wanted/healthz
+GET {{HOST}}/dashed/healthz
 Accept: application/json
 
 
