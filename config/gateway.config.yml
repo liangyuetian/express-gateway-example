@@ -26,10 +26,10 @@ apiEndpoints:
       - read
       - write
       - delete
-  wanted:
+  dashed:
     host: '*'
     methods: 'GET,OPTIONS,HEAD,PUT,PATCH,POST,DELETE' # [ "GET", "OPTIONS", "PUT", "POST", "PATCH", "DELETE" ]
-    paths: '/wanted*'
+    paths: '/dashed*'
     scopes:
       - read
       - write
@@ -44,7 +44,7 @@ serviceEndpoints:
   coffee:
     urls:
       - http://127.0.0.1:4002
-  wanted:
+  dashed:
     urls:
       - http://127.0.0.1:4003
 policies:
@@ -168,9 +168,9 @@ pipelines: # https://www.express-gateway.io/docs/policies/
               timeout: 60000
               headers: # 放置在请求头中
                 X-Name: 'x1s'
-  wanted:
+  dashed:
     apiEndpoints:
-      - wanted
+      - dashed 
     policies:
       - cors: # 其实配置的是：Access-Control-Allow-Origin 属性
           - action:
@@ -186,7 +186,7 @@ pipelines: # https://www.express-gateway.io/docs/policies/
                   r-test: "'header value'"
       - proxy:
           - action:
-              serviceEndpoint: wanted
+              serviceEndpoint: dashed
               #              protocolRewrite: 'http' # 重写http协议
               changeOrigin: true
               secure: false # 验证ssl证书
